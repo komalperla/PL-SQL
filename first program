@@ -1,0 +1,11 @@
+DECLARE
+    ordernumber number:=1000;
+    orderid number default 1001;
+    customername VARCHAR2(20) :='java';
+BEGIN
+        dbms_output.put_line('welcome to the course');
+        dbms_output.put_line(ordernumber);
+        dbms_output.put_line(orderid);
+        dbms_output.put_line(customername);
+
+END;
