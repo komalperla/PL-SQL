@@ -1,0 +1,11 @@
+--method 1 for calling functions
+select find_sales(to_date('01-jan-2015','dd-mon-yyyy')) from dual
+
+--method 2 for calling function
+DECLARE 
+    SCOUNT NUMBER:=0;
+BEGIN
+    SCOUNT:=find_sales(to_date('01-jan-2015','dd-mon-yyyy'));
+    DBMS_OUTPUT.PUT_LINE(SCOUNT);
+END;
+/
