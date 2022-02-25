@@ -1,0 +1,11 @@
+CREATE FUNCTION find_sales
+(
+p_sales_date IN date
+) RETURN NUMBER
+AS
+    num_of_sales number:=0;
+BEGIN
+    SELECT COUNT(*) INTO num_of_sales from sales
+    WHERE sales_date=p_sales_date;
+    RETURN num_of_sales;
+END find_sales;
