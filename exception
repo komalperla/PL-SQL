@@ -1,0 +1,28 @@
+CREATE PROCEDURE GET_CUSTOMER
+(
+    c_id IN NUMBER
+ )
+ AS
+    c_name customer.first_name%type;
+    c_cntry customer.country%type;
+BEGIN
+    select first_name , country into c_name,c_cntry
+    from customer
+    where customer_id=c_id;
+    
+    DBMS_OUTPUT.PUT_LINE('Name:'||c_name);
+    DBMS_OUTPUT.PUT_LINE('Country:'||c_cntry);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('NO SUCH MUSTOMER');
+    WHEN TO_MANY_ROWS THEN
+    DBMS_OUTPUT.PUT_LINE('YOU GOT MORE THAN 1 ROW!');
+    WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('ERROR');
+END;
+/  
+ 
+ 
+ execute GET_CUSTOMER(10);
+ 
+ select * from customer order by customer_id;
