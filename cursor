@@ -1,0 +1,40 @@
+create or replace procedure process_customer
+(
+c_id in customer.customer_id%type
+)
+IS
+  c_fname  customer.first_name%type;
+c_lname customer.last_name%type;
+c_mname customer.middle_name%type;
+c_add1 customer.address_line1%type;
+c_add2 customer.address_line2%type;
+c_city customer.city%type;
+c_country customer.country%type;
+c_date_added customer.date_added%type;
+c_region customer.region%type;
+
+cursor c is select first_name,last_name,middle_name,address_line1,address_line2,
+	city,country,date_added,region
+	from customer
+	where customer_id=c-id;--declartion of cursor
+BEGIN
+open c;--opening cursor
+ 	fetch c
+	into c_fname,c_lname,c_mname,c_add1,c_add2,c_city,c_country,c_date_added,c_region;--fetching of data
+	exit when c%NOTFOUND;
+loop
+	DBMS_OUTPUT.PUT_LINE('First Name:'||c_fname);
+	DBMS_OUTPUT.PUT_LINE('last Name:'||c_lname);
+	DBMS_OUTPUT.PUT_LINE('middle Name:'||c_mname);
+        DBMS_OUTPUT.PUT_LINE('Address line1:'||c_add1);
+	DBMS_OUTPUT.PUT_LINE('Address line2:'||c_add2);
+	DBMS_OUTPUT.PUT_LINE('city:'||c_city);
+	DBMS_OUTPUT.PUT_LINE('country:'||c_country);
+	DBMS_OUTPUT.PUT_LINE('date added:'||c_date_added);
+	DBMS_OUTPUT.PUT_LINE('region:'||c_region);
+  end loop;  
+close c;
+END;
+
+execute process_customer(10);
+
