@@ -1,0 +1,37 @@
+create or replace function get_names
+(
+	custid in number
+)
+	return SYS_REFCURSOR
+IS
+	l_return SYS_REFCURSOR;
+BEGIN 
+OPEN l_return FOR
+	SELECT first_name,last_name
+	from customer
+	where customer_id=custid;
+return l_return;
+end get_names;
+
+
+create or replace procedure display_names
+IS
+c_rec SYS_REFCURSOR;
+fname varchar(50);
+lname varchar(50);
+BEGIN
+c_rec:=get_names(10);
+
+loop
+fetch c_rec into fname,lname;
+exit when c_rec%notfound;
+DBMS_OUTPUT.PUT_LINE(fname);
+DBMS_OUTPUT.PUT_LINE(lname);
+end loop;
+
+close c_rec;
+end;
+
+
+
+execute display_names();
