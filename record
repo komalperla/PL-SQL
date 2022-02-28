@@ -1,0 +1,25 @@
+create or replace procedure process_customer
+(
+c_id in customer.customer_id%type
+)
+IS
+  c_rec customer%rowtype;
+BEGIN
+ 	select *
+	into c_rec
+	from customer
+	where customer_id=c_id;
+
+	DBMS_OUTPUT.PUT_LINE('First Name:'||c_rec.first_name);
+	DBMS_OUTPUT.PUT_LINE('last Name:'||c_rec.last_name);
+	DBMS_OUTPUT.PUT_LINE('middle Name:'||c_rec.middle_name);
+    DBMS_OUTPUT.PUT_LINE('Address line1:'||c_rec.address_line1);
+	DBMS_OUTPUT.PUT_LINE('Address line2:'||c_rec.address_line2);
+	DBMS_OUTPUT.PUT_LINE('city:'||c_rec.city);
+	DBMS_OUTPUT.PUT_LINE('country:'||c_rec.country);
+	DBMS_OUTPUT.PUT_LINE('date added:'||c_rec.date_added);
+	DBMS_OUTPUT.PUT_LINE('region:'||c_rec.region);
+END;
+
+
+execute process_customer(10);
